@@ -1,11 +1,40 @@
 
 <?php
+require 'connectdb.php';
 session_start();
+
+
+
+
+
 if (!isset($_SESSION['user_id'])) {
     echo "<script>alert('Please login first');</script>";
     echo "<script>window.location.href = 'log_in.php';</script>";
     exit();
 }
+
+
+$sql = "SELECT * FROM loan";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $user_id = $row['account_id'];
+        $ending_time = $row['end_date'];
+
+        $endDateTimeObj = new DateTime($ending_time);
+
+        if ($endDateTimeObj < new DateTime()) {
+
+            $deleteQry =  "DELETE FROM loan WHERE account_id = '$user_id'";
+
+            $upd = $conn->query($deleteQry);
+        }
+    }
+}
+
+
+
 ?>
 
 
@@ -45,10 +74,7 @@ if (!isset($_SESSION['user_id'])) {
                         <a class="nav-link" href="contact.php">Contact</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Get account number</a>
-                    </li>
-
+                  
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php">Logout</a>
                     </li>
@@ -67,14 +93,15 @@ if (!isset($_SESSION['user_id'])) {
                     <img src="type.png" class="card-img-top" alt="Select Car">
                     <div class="card-body text-center">
 
+                      
                         <div class="dropdown">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                              Account Type
+                            transection type
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">Link 1</a></li>
-                              <li><a class="dropdown-item" href="#">Link 2</a></li>
-                              <li><a class="dropdown-item" href="#">Link 3</a></li>
+                              <li><a class="dropdown-item" href="saving.php">Deposite</a></li>
+                              <li><a class="dropdown-item" href="withdrow_money.php">withdrow</a></li>
+                              <li><a class="dropdown-item" href="transfer.php">Transer</a></li>
                             </ul>
                           </div>
 
@@ -86,7 +113,16 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="card">
                     <img src="loan.png" class="card-img-top" alt="loan">
                     <div class="card-body text-center">
-                        <a href="#" class="btn btn-primary">Loan</a>
+                    <div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                              About Loan
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="apply_for_loan.php">Get loan</a></li>
+                              <li><a class="dropdown-item" href="payment_loan.php">Payment Loan</a></li>
+                           
+                            </ul>
+                          </div>
                     </div>
                 </div>
             </div>
@@ -95,7 +131,16 @@ if (!isset($_SESSION['user_id'])) {
                     <img src="type.png" class="card-img-top" alt="info">
                     <div class="card-body text-center">
                         
-                        <a href="#" class="btn btn-primary">Bank information</a>
+                    <div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                              Some info you need to Know
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="manager.php">manager info</a></li>
+                              <li><a class="dropdown-item" href="loaninfo.php">Loan info</a></li>
+                           
+                            </ul>
+                          </div>
                     </div>
                 </div>
             </div>

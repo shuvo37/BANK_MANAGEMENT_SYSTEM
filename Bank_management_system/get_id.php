@@ -28,7 +28,7 @@
 
                          
                             <!-- Submit Button -->
-                            <a href="rant_a_car.html" button type = "submit" class="btn btn-primary">submit</a>
+                            <a href="#" button type = "submit" class="btn btn-primary">submit</a>
                         </form>
                     </div>
                 </div>

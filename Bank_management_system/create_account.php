@@ -1,17 +1,35 @@
 
 <?php
-
 require 'connectdb.php';
 
+function showAlert($text , $icon, $redirect = null) {
+    echo "<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            title: '$icon',
+            text: '$text',
+            icon: '$icon',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {";
+    if ($redirect) {
+        echo "window.location.href = '$redirect';";
+    }
+    echo "}
+        });
+    });
+    </script>";
+}
+
 if (isset($_POST['submit'])) {
- 
+    $branch = isset($_POST['branch']) ? $_POST['branch'] : '';
 
     // Retrieve and escape form data
     $fullname = $conn->real_escape_string($_POST['fullname']);
     $address = $conn->real_escape_string($_POST['address']);
     $phone = $conn->real_escape_string($_POST['phone']);
     $email = $conn->real_escape_string($_POST['email']);
-    $password = $_POST['password']; // No need to escape as we will hash it
+    $password = $conn->real_escape_string($_POST['password']);
     $dob = $conn->real_escape_string($_POST['dob']);
 
     // Check if the email already exists
@@ -19,38 +37,29 @@ if (isset($_POST['submit'])) {
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        echo "<script>alert('Email has already been taken');</script>";
-        echo "<script>window.location.href = 'new_account.php';</script>";
+        showAlert('Email has already been taken', 'error');
     } else if (!preg_match("/@gmail\.com$/", $email)) {
-        echo "<script>alert('Email must be a @gmail.com address');</script>";
-        echo "<script>window.location.href = 'new_account.php';</script>";
+        showAlert('Email must be a @gmail.com address', 'error');
     } else if (strlen($password) < 4) {
-        echo "<script>alert('Password must be more than 3 characters');</script>";
-        echo "<script>window.location.href = 'new_account.php';</script>";
+        showAlert('Password must be more than 3 characters', 'error');
     } else if (strlen($fullname) == 0) {
-        echo "<script>alert('Full name cannot be empty');</script>";
-        echo "<script>window.location.href = 'new_account.php';</script>";
+        showAlert('Full name cannot be empty', 'error');
+    } else if (strlen($branch) == 0) {
+        showAlert('Branch did not select', 'error');
     } else {
-        
-     
         // Insert the data into the user_info table
-        $qry = "INSERT INTO user_info (full_name, address, phone, email, password, date_of_birth) VALUES ('$fullname', '$address', '$phone', '$email', '$password', '$dob')";
+        $qry = "INSERT INTO user_info (full_name, address, phone, email, password, date_of_birth, branch)
+                VALUES ('$fullname', '$address', '$phone', '$email', '$password', '$dob', '$branch')";
         $insrt = $conn->query($qry);
 
         if ($insrt) {
-            echo "<script>alert('Account created successfully');</script>";
-            echo "<script>window.location.href = 'log_in.php';</script>";
+            showAlert('Account created successfully', 'success', 'log_in.php');
         } else {
-            echo "<script>alert('Error occurred during record insertion');</script>";
-            echo "<script>window.location.href = 'new_account.php';</script>";
+            showAlert('Error occurred during record insertion', 'error');
         }
     }
-} else {
-    // Debug alert to check if the form submission is not detected
-    echo "<script>alert('Form not submitted');</script>";
 }
 ?>
-
 
 
 
@@ -62,6 +71,9 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="container mt-5">
@@ -93,11 +105,31 @@ if (isset($_POST['submit'])) {
                         <label for="dob">Date of Birth</label>
                         <input type="date" class="form-control" id="dob" name="dob" required>
                     </div>
+                    <div class="form-group text-center">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle w-100" type="button" id="branchDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Branch
+                            </button>
+                            <ul class="dropdown-menu w-100" aria-labelledby="branchDropdown">
+                                <li><a class="dropdown-item" href="#" onclick="selectBranch('Branch_A')">Branch_A</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="selectBranch('Branch_B')">Branch_B</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="selectBranch('Branch_C')">Branch_C</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br><br>
+                    <input type="hidden" name="branch" id="branchInput" value="">
                     <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+    function selectBranch(branch) {
+        document.getElementById('branchInput').value = branch;
+        document.getElementById('branchDropdown').innerText = 'Branch_' + branch;
+    }
+    </script>
 </body>
 </html>
-

@@ -1,4 +1,3 @@
-
 <?php
 require 'connectdb.php';
 
@@ -19,6 +18,13 @@ function showAlert($text , $icon, $redirect = null) {
         });
     });
     </script>";
+}
+
+function calculateAge($dob) {
+    $birthDate = new DateTime($dob);
+    $today = new DateTime('today');
+    $age = $birthDate->diff($today)->y;
+    return $age;
 }
 
 if (isset($_POST['submit'])) {
@@ -46,6 +52,8 @@ if (isset($_POST['submit'])) {
         showAlert('Full name cannot be empty', 'error');
     } else if (strlen($branch) == 0) {
         showAlert('Branch did not select', 'error');
+    } else if (calculateAge($dob) < 18) {
+        showAlert('You must be at least 18 years old', 'error');
     } else {
         // Insert the data into the user_info table
         $qry = "INSERT INTO user_info (full_name, address, phone, email, password, date_of_birth, branch)
@@ -60,9 +68,6 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -128,8 +133,28 @@ if (isset($_POST['submit'])) {
     <script>
     function selectBranch(branch) {
         document.getElementById('branchInput').value = branch;
-        document.getElementById('branchDropdown').innerText = 'Branch_' + branch;
+        document.getElementById('branchDropdown').innerText = branch;
     }
+
+    document.getElementById('createAccountForm').addEventListener('submit', function(event) {
+        var dobInput = document.getElementById('dob').value;
+        var dob = new Date(dobInput);
+        var today = new Date();
+        var age = today.getFullYear() - dob.getFullYear();
+        var month = today.getMonth() - dob.getMonth();
+        if (month < 0 || (month === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        if (age < 18) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Error',
+                text: 'You must be at least 18 years old',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    });
     </script>
 </body>
 </html>

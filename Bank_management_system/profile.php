@@ -145,8 +145,6 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -156,6 +154,20 @@ if (isset($_POST['submit'])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    function validateForm() {
+        const fileInput = document.getElementById('fileInput');
+        if (!fileInput.value) {
+            Swal.fire({
+                text: 'Please select an image before uploading.',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+        return true;
+    }
+  </script>
 </head>
 <body>
 
@@ -197,7 +209,7 @@ if (isset($_POST['submit'])) {
                     <h5 class="card-title"> <?php echo $_SESSION['user_name']; ?></h5>
                     <h5 class="card-title"> <?php echo $_SESSION['user_email']; ?></h5>
                     <h5 class="card-title"> <?php echo 'Account Number: '. $_SESSION['user_id']; ?></h5>
-                    <form id="uploadForm" action="" method="post" enctype="multipart/form-data">
+                    <form id="uploadForm" action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                         <input type="file" class="form-control bg-secondary mb-3" id="fileInput" name="image" accept="image/*" onchange="previewImage(event)">
                         <button type="submit" name="submit" class="btn btn-primary">Upload Image</button>
                     </form>

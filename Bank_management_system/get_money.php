@@ -190,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header text-center"><h4>Date Difference Calculator</h4></div>
+                <div class="card-header text-center"><h4>Get your loan</h4></div>
                 <div class="card-body">
                     <form action="get_money.php" method="POST">
                         <div class="form-group">

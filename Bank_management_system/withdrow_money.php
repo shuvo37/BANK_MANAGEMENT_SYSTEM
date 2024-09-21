@@ -1,5 +1,3 @@
-
-
 <?php
 require 'connectdb.php';
 session_start();
@@ -52,31 +50,21 @@ if (isset($_POST['submit'])) {
                     showAlert('Account updated successfully', 'success', 'withdrow_money.php');
 
                     $type = "withdraw";
-                $qry = "INSERT INTO transfer (account_id, transfer_type, email, transfer_datetime, branch,amount)
-                        VALUES ('$id', '$type', '$email', '$dob', '$branch ,'$amount')";
-                $insrtTransfer = $conn->query($qry);
+                    $qry = "INSERT INTO transfer (account_id, transfer_type, email, transfer_datetime, branch, amount)
+                            VALUES ('$id', '$type', '$email', '$dob', '$branch', '$amount')";
+                    $insrtTransfer = $conn->query($qry);
                 } else {
                     showAlert('Error occurred during record update: ' . $conn->error, 'error', 'withdrow_money.php');
                 }
-
-                
-
             } else {
                 showAlert('You do not have sufficient amount of money', 'error', 'withdrow_money.php');
             }
-
-           
-
-            
         }
     } else {
         showAlert('Branch mismatch. Please select the correct branch.', 'error', 'withdrow_money.php');
     }
 }
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,7 +72,6 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank Management System - Withdraw Money</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
         .dropdown-menu {
@@ -97,8 +84,6 @@ if (isset($_POST['submit'])) {
     </style>
 </head>
 <body>
-
-    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">BMS</a>
@@ -122,13 +107,10 @@ if (isset($_POST['submit'])) {
                     <li class="nav-item">
                         <a class="nav-link" href="contact.php">Contact</a>
                     </li>
-                   
-                    
                 </ul>
             </div>
         </div>
     </nav>
-
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -143,7 +125,6 @@ if (isset($_POST['submit'])) {
                                 <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter amount" required>
                             </div>
                             <br>
-
                             <div class="form-group text-center">
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle w-100" type="button" id="branchDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -156,7 +137,6 @@ if (isset($_POST['submit'])) {
                                     </ul>
                                 </div>
                             </div>
-
                             <input type="hidden" name="branch" id="branchInput" value="">
                             <br>
                             <button type="submit" class="btn btn-primary" name="submit">Withdraw</button>
@@ -166,14 +146,12 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
-
     <script>
     function selectBranch(branch) {
         document.getElementById('branchInput').value = branch;
         document.getElementById('branchDropdown').innerText = branch;
     }
     </script>
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </body>

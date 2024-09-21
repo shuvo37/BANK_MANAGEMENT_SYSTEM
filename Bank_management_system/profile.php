@@ -154,6 +154,127 @@ if (isset($_POST['submit'])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- <style>
+        body {
+            background: url(images/lg.jpg);
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: #333;
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+        .navbar-brand:hover, .nav-link:hover {
+            color: #ffcbcb !important;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background-color: transparent;
+            border-bottom: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        .btn-primary {
+            background-color: #ff7f50;
+            border-color: #ff7f50;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff5733;
+            border-color: #ff5733;
+        }
+
+        .dropdown-toggle {
+            background-color: #ff7f50;
+            border-color: #ff7f50;
+        }
+
+        .dropdown-menu {
+            background-color: #333;
+        }
+
+        .dropdown-item {
+            color: white;
+        }
+
+        .dropdown-item:hover {
+            background-color: #ff5733;
+        }
+    </style>
+   -->
+
+   <style>
+    body {
+        background: url(images/bank2.jpg);
+        color: #f1f1f1; /* Light color for text */
+        font-family: 'Arial', sans-serif;
+    }
+
+    .navbar-brand, .nav-link {
+        color: #f1f1f1 !important;
+    }
+
+    .navbar-brand:hover, .nav-link:hover {
+        color: #ffcbcb !important;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        color: #f1f1f1; /* Light text color inside cards */
+    }
+
+    .card-title, h5, p, ul.list-group-item {
+        color: #f1f1f1; /* Light text color for titles and paragraphs */
+    }
+
+    .form-control {
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 1px solid #ddd;
+        color: #333;
+    }
+
+    .btn-primary {
+        background-color: #ff7f50;
+        border-color: #ff7f50;
+    }
+
+    .btn-primary:hover {
+        background-color: #ff5733;
+        border-color: #ff5733;
+    }
+
+    .dropdown-item {
+        color: white;
+    }
+
+    .dropdown-item:hover {
+        background-color: #ff5733;
+    }
+</style>
   <script>
     function validateForm() {
         const fileInput = document.getElementById('fileInput');
@@ -168,10 +289,13 @@ if (isset($_POST['submit'])) {
         return true;
     }
   </script>
+
+
+
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-black">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">BMS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -204,7 +328,7 @@ if (isset($_POST['submit'])) {
         <div class="col-md-4">
             <!-- Left side content (profile information, etc.) -->
             <div class="card">
-                <div class="card-body text-center">
+                <div class="card-body text-center bg-secondary">
                     <img src="<?php echo $_SESSION['user_img']; ?>" class="rounded-circle mb-3" id="profileImage" alt="Profile Image">
                     <h5 class="card-title"> <?php echo $_SESSION['user_name']; ?></h5>
                     <h5 class="card-title"> <?php echo $_SESSION['user_email']; ?></h5>
@@ -214,7 +338,7 @@ if (isset($_POST['submit'])) {
                         <button type="submit" name="submit" class="btn btn-primary">Upload Image</button>
                     </form>
                 </div>
-                <div class="card-footer text-center">
+                <div class="card-footer text-center ">
                     <form method="post" action="">
                         <button type="submit" id="saving" name="saving" class="btn btn-primary mt-3">Total Saving</button>
                         <button type="submit" id="loan" name="loan" class="btn btn-primary mt-3">Loan</button>
@@ -226,7 +350,7 @@ if (isset($_POST['submit'])) {
             <!-- Right side content (transaction history) -->
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Transaction History</h5>
+                    <h5 class="card-title bg">Transaction History</h5>
                     <ul class="list-group">
                         <?php
                         $id = $_SESSION['user_id'];

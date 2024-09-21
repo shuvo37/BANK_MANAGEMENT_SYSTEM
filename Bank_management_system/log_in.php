@@ -72,6 +72,24 @@ if (isset($_POST['login'])) {
     <title>Bank Management Project</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <style>
+        body {
+            background-image: url('images/lg1.jpg'); /* Replace with your image path */
+            background-size: cover; /* Ensure the image covers the whole background */
+            background-position: center; /* Center the background image */
+            height: 100vh; /* Full height */
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8); /* White background with transparency */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            width: 100%; /* Make buttons full width */
+            margin-bottom: 10px; /* Space between buttons */
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
@@ -88,10 +106,8 @@ if (isset($_POST['login'])) {
                         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                     </div>
                     <button type="submit" class="btn btn-primary" name="login">Login</button>
-                    <br><br>
                     <a href="forget.php" class="btn btn-primary">Forget password?</a>
-                    <br><br>
-                    <a href="create_account.php" class="btn btn-primary btn-lg mr-2">Create Account</a>
+                    <a href="create_account.php" class="btn btn-primary">Create Account</a>
                 </form>
             </div>
         </div>

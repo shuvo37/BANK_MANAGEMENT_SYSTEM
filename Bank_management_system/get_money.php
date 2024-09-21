@@ -153,11 +153,83 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <style>
+        body {
+            background: url(images/bank2.jpg);
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: #333;
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+        .navbar-brand:hover, .nav-link:hover {
+            color: #ffcbcb !important;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background-color: transparent;
+            border-bottom: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        .btn-primary {
+            background-color: #ff7f50;
+            border-color: #ff7f50;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff5733;
+            border-color: #ff5733;
+        }
+
+        .dropdown-toggle {
+            background-color: #ff7f50;
+            border-color: #ff7f50;
+        }
+
+        .dropdown-menu {
+            background-color: #333;
+        }
+
+        .dropdown-item {
+            color: white;
+        }
+
+        .dropdown-item:hover {
+            background-color: #ff5733;
+        }
+    </style>
+
+
 </head>
 <body>
 
 <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-black">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">BMS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -206,7 +278,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <label for="endDate">End Date for loan:</label>
                             <input type="date" class="form-control" id="endDate" name="endDate" required>
                         </div>
+                        <br>
+                        <div class="text-center">
                         <button type="submit" id="submit" name="submit" class="btn btn-primary">Get money</button>
+                        </div>
                     </form>
                 </div>
             </div>

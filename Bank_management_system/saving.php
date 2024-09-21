@@ -70,17 +70,8 @@ if (isset($_POST['submit'])) {
                 $qry = "INSERT INTO transfer (account_id, transfer_type, email, transfer_datetime, branch,amount)
                         VALUES ('$id', '$type', '$email', '$dob', '$branch','$amount')";
                 $insrtTransfer = $conn->query($qry);
-
-
             }
 
-           
-
-            // if ($insrtTransfer) {
-            //     showAlert('Saved in transfer successfully', 'success', 'saving.php');
-            // } else {
-            //     showAlert('Error occurred during record insertion in transfer: ' . $conn->error, 'error', 'saving.php');
-            // }
         } else {
             showAlert('Error occurred during record fetching: ' . $conn->error, 'error', 'saving.php');
         }
@@ -89,7 +80,6 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,19 +90,79 @@ if (isset($_POST['submit'])) {
     <!-- SweetAlert CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
-        .dropdown-menu {
-            width: 100%;
-            text-align: center;
+        body {
+            background: url(images/bank2.jpg);
+            color: white;
+            font-family: 'Arial', sans-serif;
         }
+
+        .navbar {
+            background-color: #333;
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+        .navbar-brand:hover, .nav-link:hover {
+            color: #ffcbcb !important;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background-color: transparent;
+            border-bottom: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ddd;
+            color: #333;
+        }
+
+        .btn-primary {
+            background-color: #ff7f50;
+            border-color: #ff7f50;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff5733;
+            border-color: #ff5733;
+        }
+
+        .dropdown-toggle {
+            background-color: #ff7f50;
+            border-color: #ff7f50;
+        }
+
+        .dropdown-menu {
+            background-color: #333;
+        }
+
         .dropdown-item {
-            width: 100%;
+            color: white;
+        }
+
+        .dropdown-item:hover {
+            background-color: #ff5733;
         }
     </style>
 </head>
 <body>
 
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">BMS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,19 +185,17 @@ if (isset($_POST['submit'])) {
                     <li class="nav-item">
                         <a class="nav-link" href="contact.php">Contact</a>
                     </li>
-                   
-                    
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-5">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header text-center">
-                        <h4>Saving money</h4>
+                        <h4>Saving Money</h4>
                     </div>
                     <div class="card-body">
                         <form id="saving" method="POST" action="saving.php">
@@ -156,7 +204,6 @@ if (isset($_POST['submit'])) {
                                 <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter amount" required>
                             </div>
                             <br>
-
                             <div class="form-group text-center">
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle w-100" type="button" id="branchDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -172,7 +219,7 @@ if (isset($_POST['submit'])) {
 
                             <input type="hidden" name="branch" id="branchInput" value="">
                             <br>
-                            <button type="submit" class="btn btn-primary" name="submit">Save</button>
+                            <button type="submit" class="btn btn-primary w-100" name="submit">Save</button>
                         </form>
                     </div>
                 </div>
@@ -191,3 +238,4 @@ if (isset($_POST['submit'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
+``
